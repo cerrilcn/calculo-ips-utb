@@ -1,0 +1,118 @@
+import pandas as pd 
+import numpy as np
+
+from sqlalchemy import create_engine
+
+DATABASE_URL = "postgresql+psycopg2://utb_students:AVNS_OXQBajkVtAn2czuYQYe@pg-diplomado-utb-diplomado-utb-2024.c.aivencloud.com:24354/economic_kpis_utb"
+
+engine = create_engine(DATABASE_URL)
+
+sql_query = "select * from yearly_value"
+df = pd.read_sql(sql_query, con=engine)
+
+
+sql_query = "select * from country_info"
+df2 = pd.read_sql(sql_query, con=engine)
+
+sql_query = "select * from indicator"
+df3 = pd.read_sql(sql_query, con=engine)
+
+#Calculamos el IPS de Bosnia and Herzegovina  
+#Calculamos los índices de 2004 2007 y 2011
+
+# Definir los datos
+data = {
+    'Y': [3061.551426913604, 3669.0167946349134, 4091.581885099054],  # Ingreso total
+    'P': [5515525.0, 5521606.0, 5529543.0],  # Población total
+    'G': [34.0, 33.1, 33.0],  # Índice de Gini
+    'pov': [0.2, 0.1, 0.2]  # Tasa de pobreza
+}
+
+# Crear un DataFrame de pandas
+BIH = pd.DataFrame(data)
+
+# Calcular el IPS
+BIH['IPS'] = (BIH['Y'] / BIH['P']) * (1 - BIH['G'] / 100) * (1 - BIH['pov'])
+
+# Mostrar el DataFrame con el IPS calculado
+print(BIH)
+
+#Calculamos el IPS de Finlandia  
+#Calculamos los índices de 2019 2020 y 2021
+
+# Definir los datos
+data1 = {
+    'Y': [46135.88142426314, 44984.73445054872, 46165.68655373868],  # Ingreso total
+    'P': [5521606.0, 5529543.0, 5541017.0],  # Población total
+    'G': [27.7, 27.1, 27.7],  # Índice de Gini
+    'pov': [0.0, 0.0, 0.0]  # Tasa de pobreza
+}
+
+# Crear un DataFrame de pandas
+FIN = pd.DataFrame(data1)
+
+# Calcular el IPS
+FIN['IPS'] = (FIN['Y'] / FIN['P']) * (1 - FIN['G'] / 100) * (1 - FIN['pov'])
+
+# Mostrar el DataFrame con el IPS calculado
+print(FIN)
+
+#Calculamos el IPS de Kiribati  
+#Calculamos los índices de 2006 y 2019
+
+# Definir los datos
+data2 = {
+    'Y': [1419.2251793626804, 1829.22305681577],  # Ingreso total
+    'P': [100083.0, 124241.0],  # Población total
+    'G': [37.0, 27.8],  # Índice de Gini
+    'pov': [12.4, 3.8]  # Tasa de pobreza
+}
+
+# Crear un DataFrame de pandas
+KIR = pd.DataFrame(data2)
+
+# Calcular el IPS
+KIR['IPS'] = (KIR['Y'] / KIR['P']) * (1 - KIR['G'] / 100) * (1 - KIR['pov'] / 100)
+
+# Mostrar el DataFrame con el IPS calculado
+print(KIR)
+
+#Calculamos el IPS de Netherlands  
+#Calculamos los índices de 2019 2020 y 2021
+
+# Definir los datos
+data3 = {
+    'Y': [48443.73205402828, 46303.21886246999, 48913.51899025225],  # Ingreso total
+    'P': [17344874, 17441500, 17533044],  # Población total
+    'G': [29.2, 26.0, 25.7],  # Índice de Gini
+    'pov': [0.1, 0.0, 0.1]  # Tasa de pobreza
+}
+
+# Crear un DataFrame de pandas
+NLD = pd.DataFrame(data3)
+
+# Calcular el IPS
+NLD['IPS'] = (NLD['Y'] / NLD['P']) * (1 - NLD['G'] / 100) * (1 - NLD['pov'])
+
+# Mostrar el DataFrame con el IPS calculado
+print(NLD)
+
+#Calculamos el IPS de Seychelles  
+#Calculamos los índices de 2013 y 2018
+
+# Definir los datos
+data4 = {
+    'Y': [14050.313558131418, 18628.186227669597],  # Ingreso total
+    'P': [89949.0, 96762.0],  # Población total
+    'G': [46.8, 32.1],  # Índice de Gini
+    'pov': [1.1, 0.4]  # Tasa de pobreza
+}
+
+# Crear un DataFrame de pandas
+SYC = pd.DataFrame(data4)
+
+# Calcular el IPS
+SYC['IPS'] = (SYC['Y'] / SYC['P']) * (1 - SYC['G'] / 100) * (1 - SYC['pov'] / 100)
+
+# Mostrar el DataFrame con el IPS calculado
+print(SYC)
